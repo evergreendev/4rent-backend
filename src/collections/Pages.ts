@@ -1,10 +1,11 @@
-import { CollectionConfig } from "payload/types";
+import {CollectionConfig} from "payload/types";
 import MediaBlock from "../blocks/MediaBlock";
 
 export const Pages: CollectionConfig = {
     slug: "pages",
     admin: {
-        useAsTitle: "title"
+        useAsTitle: "title",
+        hidden: ({user}) => user.role !== "admin"
     },
     fields: [
         {

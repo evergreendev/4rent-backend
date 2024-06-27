@@ -1,7 +1,14 @@
 import { CollectionConfig } from "payload/types";
+import {isAdminFieldLevel} from "../access/isAdmin";
 
 export const Media: CollectionConfig = {
     slug: "media",
+    access: {
+        admin: isAdminFieldLevel
+    },
+    admin: {
+      hidden: ({user})=> user.role !== "admin"
+    },
     upload: {
         staticURL: "/media",
         staticDir: "media",

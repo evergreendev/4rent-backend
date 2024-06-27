@@ -1,4 +1,5 @@
 import { CollectionConfig } from 'payload/types'
+import {isAdminFieldLevel} from "../access/isAdmin";
 
 const Users: CollectionConfig = {
   slug: 'users',
@@ -27,24 +28,21 @@ const Users: CollectionConfig = {
         {label: "Apartment Manager", value: "apartment-manager"}
       ],
       access: {
-        update: ({req : {user}}) => {
-          return user.role === "admin"
-        }
+        update: isAdminFieldLevel
       },
     },
     {
       name: "listing_access",
       label: "Has access to the following listings:",
+      saveToJWT: true,
       type: "relationship",
       relationTo: "listings",
-      hasMany: true,
       access: {
-        update: ({req : {user}}) => {
-          return user.role === "admin"
-        }
+        update: isAdminFieldLevel
       },
+      hasMany: true,
       admin: {
-        condition:(data, siblingData, { user, }) => {
+        condition:(data, siblingData) => {
           return siblingData.role === "apartment-manager";
         }
       }

@@ -2,6 +2,9 @@ import { GlobalConfig } from "payload/types";
 
 export const Navigation: GlobalConfig = {
     slug: "navigation",
+    admin: {
+        hidden: ({user}) => user.role !== "admin"
+    },
     fields: [
         {
             name: "items",
