@@ -1,10 +1,9 @@
 import { CollectionConfig } from "payload/types";
-import {isAdminFieldLevel} from "../access/isAdmin";
 
 export const Media: CollectionConfig = {
     slug: "media",
     access: {
-        admin: isAdminFieldLevel
+        read: () => true
     },
     admin: {
       hidden: ({user})=> user.role !== "admin"
