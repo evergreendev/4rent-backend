@@ -4,7 +4,7 @@ import {isAdmin} from "../../access/isAdmin";
 import {isAdminOrPublished} from "../../access/isAdminOrPublished";
 import {slugField} from "../../fields/slug";
 import {populatePublishedAt} from "../../hooks/populatePublishedAt";
-import {revalidatePage} from "./hooks/revalidateProjects";
+import {revalidatePage} from "./hooks/revalidatePage";
 
 export const Pages: CollectionConfig = {
     slug: "pages",
