@@ -1,9 +1,10 @@
 import {CollectionConfig} from "payload/types";
-import MediaBlock from "../blocks/MediaBlock";
-import {isAdmin} from "../access/isAdmin";
-import {isAdminOrPublished} from "../access/isAdminOrPublished";
-import {slugField} from "../fields/slug";
-import {populatePublishedAt} from "../hooks/populatePublishedAt";
+import MediaBlock from "../../blocks/MediaBlock";
+import {isAdmin} from "../../access/isAdmin";
+import {isAdminOrPublished} from "../../access/isAdminOrPublished";
+import {slugField} from "../../fields/slug";
+import {populatePublishedAt} from "../../hooks/populatePublishedAt";
+import {revalidatePage} from "./hooks/revalidateProjects";
 
 export const Pages: CollectionConfig = {
     slug: "pages",
@@ -12,7 +13,8 @@ export const Pages: CollectionConfig = {
         hidden: ({user}) => user.role !== "admin"
     },
     hooks:{
-        beforeChange: [populatePublishedAt]
+        beforeChange: [populatePublishedAt],
+        afterChange: [revalidatePage]
     },
     versions: {
         drafts: true
