@@ -11,6 +11,7 @@ import {Pages} from "./collections/Pages";
 import {Navigation} from "./globals/Navigation";
 import {Media} from "./collections/Media";
 import {Listings} from "./collections/Listings";
+import {Locations} from "./collections/Locations";
 
 export default buildConfig({
   admin: {
@@ -18,7 +19,7 @@ export default buildConfig({
     bundler: webpackBundler(),
   },
   editor: slateEditor({}),
-  collections: [Users,Pages,Media,Listings],
+  collections: [Users,Pages,Media,Listings,Locations],
   globals: [Navigation],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),

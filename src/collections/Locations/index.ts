@@ -2,18 +2,18 @@ import {CollectionConfig} from "payload/types";
 import {isAdmin} from "../../access/isAdmin";
 import {isAdminOrPublished} from "../../access/isAdminOrPublished";
 import {populatePublishedAt} from "../../hooks/populatePublishedAt";
-import {revalidatePage} from "./hooks/revalidatePage";
+import {revalidateLocation} from "./hooks/revalidateLocation";
 import standardFields from "../../fields/standardFields";
 
-export const Pages: CollectionConfig = {
-    slug: "pages",
+export const Locations: CollectionConfig = {
+    slug: "locations",
     admin: {
         useAsTitle: "title",
         hidden: ({user}) => user.role !== "admin"
     },
     hooks:{
         beforeChange: [populatePublishedAt],
-        afterChange: [revalidatePage]
+        afterChange: [revalidateLocation]
     },
     versions: {
         drafts: true
