@@ -17,6 +17,7 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     bundler: webpackBundler(),
+    css: path.resolve(__dirname, 'style.scss')
   },
   editor: slateEditor({}),
   collections: [Users,Pages,Media,Listings,Locations],
