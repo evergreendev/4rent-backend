@@ -7,6 +7,7 @@ import {updateLatAndLong} from "./hooks/updateLatAndLong";
 import standardBlocks from "../../blocks";
 import {isAdminOrHasListingAccess} from "../../access/isAdminOrHasListingAccess";
 import {checkForListingLimit} from "./hooks/checkForListingLimit";
+import {isAdminOrHasListingAccessOrIsPublished} from "../../access/isAdminOrHasListingAccessOrIsPublished";
 
 export const Listings: CollectionConfig = {
     slug: "listings",
@@ -22,7 +23,7 @@ export const Listings: CollectionConfig = {
         drafts: true
     },
     access: {
-        read: isAdminOrHasListingAccess(),
+        read: isAdminOrHasListingAccessOrIsPublished(),
         update: isAdminOrHasListingAccess(),
         delete: isAdminOrHasListingAccess()
     },

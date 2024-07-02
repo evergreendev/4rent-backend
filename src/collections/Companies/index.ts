@@ -4,6 +4,7 @@ import {isAdmin, isAdminFieldLevel} from "../../access/isAdmin";
 import {revalidateCompany} from "./hooks/revalidateCompany";
 import standardFields from "../../fields/standardFields";
 import {populatePublishedAt} from "../../hooks/populatePublishedAt";
+import {isAdminOrHasCompanyAccessOrIsPublished} from "../../access/isAdminOrHasCompanyAccessOrIsPublished";
 
 export const Companies: CollectionConfig = {
     slug: "companies",
@@ -19,7 +20,7 @@ export const Companies: CollectionConfig = {
         drafts: true
     },
     access: {
-        read: isAdminOrHasCompanyAccess(),
+        read: isAdminOrHasCompanyAccessOrIsPublished(),
         create: isAdmin(),
         update: isAdminOrHasCompanyAccess(),
         delete: isAdminOrHasCompanyAccess()
