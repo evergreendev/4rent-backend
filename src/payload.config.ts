@@ -12,6 +12,7 @@ import {Navigation} from "./globals/Navigation";
 import {Media} from "./collections/Media";
 import {Listings} from "./collections/Listings";
 import {Locations} from "./collections/Locations";
+import {Companies} from "./collections/Companies";
 
 export default buildConfig({
   admin: {
@@ -20,7 +21,7 @@ export default buildConfig({
     css: path.resolve(__dirname, 'style.scss')
   },
   editor: slateEditor({}),
-  collections: [Users,Pages,Media,Listings,Locations],
+  collections: [Users,Pages,Media,Listings,Locations,Companies],
   globals: [Navigation],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),

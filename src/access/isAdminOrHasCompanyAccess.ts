@@ -1,6 +1,6 @@
 import {Access} from "payload/config";
 
-export const isAdminOrHasListingAccess = (): Access => ({req: {user}}) => {
+export const isAdminOrHasCompanyAccess = (): Access => ({req: {user}}) => {
     if (user) {
         if (user.role === "admin") return true;
 
@@ -9,7 +9,7 @@ export const isAdminOrHasListingAccess = (): Access => ({req: {user}}) => {
         if (user.company_access?.length > 0) {
 
             return {
-                "company": {
+                "id": {
                     in: ids
                 }
             }

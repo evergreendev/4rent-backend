@@ -4,6 +4,7 @@ import {isAdminOrPublished} from "../../access/isAdminOrPublished";
 import {populatePublishedAt} from "../../hooks/populatePublishedAt";
 import {revalidatePage} from "./hooks/revalidatePage";
 import standardFields from "../../fields/standardFields";
+import standardBlocks from "../../blocks";
 
 export const Pages: CollectionConfig = {
     slug: "pages",
@@ -11,7 +12,7 @@ export const Pages: CollectionConfig = {
         useAsTitle: "title",
         hidden: ({user}) => user.role !== "admin"
     },
-    hooks:{
+    hooks: {
         beforeChange: [populatePublishedAt],
         afterChange: [revalidatePage]
     },
@@ -24,5 +25,11 @@ export const Pages: CollectionConfig = {
         create: isAdmin(),
         delete: isAdmin()
     },
-    fields: [...standardFields]
+    fields: [...standardFields, {
+        name: "content",
+        type: "blocks",
+        minRows: 1,
+        maxRows: 20,
+        blocks: standardBlocks
+    }]
 }

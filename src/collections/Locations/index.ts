@@ -4,6 +4,7 @@ import {isAdminOrPublished} from "../../access/isAdminOrPublished";
 import {populatePublishedAt} from "../../hooks/populatePublishedAt";
 import {revalidateLocation} from "./hooks/revalidateLocation";
 import standardFields from "../../fields/standardFields";
+import standardBlocks from "../../blocks";
 
 export const Locations: CollectionConfig = {
     slug: "locations",
@@ -24,5 +25,11 @@ export const Locations: CollectionConfig = {
         create: isAdmin(),
         delete: isAdmin()
     },
-    fields: [...standardFields]
+    fields: [...standardFields,    {
+        name: "content",
+        type: "blocks",
+        minRows: 1,
+        maxRows: 20,
+        blocks: standardBlocks
+    }]
 }

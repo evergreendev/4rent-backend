@@ -1,20 +1,21 @@
 import {CollectionConfig} from "payload/types";
-import {isAdminOrHasListingAccess} from "../../access/isAdminOrHasListingAccess";
-import {isAdmin} from "../../access/isAdmin";
 import {revalidateListing} from "./hooks/revalidateListing";
 import standardFields from "../../fields/standardFields";
 import AddressSearch from "../../fields/AddressSearch";
 import {populatePublishedAt} from "../../hooks/populatePublishedAt";
 import {updateLatAndLong} from "./hooks/updateLatAndLong";
+import standardBlocks from "../../blocks";
+import {isAdminOrHasListingAccess} from "../../access/isAdminOrHasListingAccess";
+import {checkForListingLimit} from "./hooks/checkForListingLimit";
 
 export const Listings: CollectionConfig = {
     slug: "listings",
     admin: {
         useAsTitle: "title",
-        defaultColumns: ["title", "status"]
+        defaultColumns: ["title", "status","company"]
     },
     hooks: {
-        beforeChange: [populatePublishedAt,updateLatAndLong],
+        beforeChange: [populatePublishedAt,updateLatAndLong,checkForListingLimit],
         afterChange: [revalidateListing]
     },
     versions: {
@@ -22,7 +23,6 @@ export const Listings: CollectionConfig = {
     },
     access: {
         read: isAdminOrHasListingAccess(),
-        create: isAdmin(),
         update: isAdminOrHasListingAccess(),
         delete: isAdminOrHasListingAccess()
     },
@@ -60,6 +60,19 @@ export const Listings: CollectionConfig = {
     ],
     fields: [
         ...standardFields,
+        {
+            name: "company",
+            type: "relationship",
+            relationTo: "companies",
+            required: true
+        },
+        {
+            name: "content",
+            type: "blocks",
+            minRows: 1,
+            maxRows: 20,
+            blocks: standardBlocks
+        },
         {
             name: "addressSearch",
             label: "Address Search",

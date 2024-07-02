@@ -32,11 +32,11 @@ const Users: CollectionConfig = {
       },
     },
     {
-      name: "listing_access",
-      label: "Has access to the following listings:",
+      name: "company_access",
+      label: "User has access to the following companies' listings:",
       saveToJWT: true,
       type: "relationship",
-      relationTo: "listings",
+      relationTo: "companies",
       access: {
         update: isAdminFieldLevel
       },

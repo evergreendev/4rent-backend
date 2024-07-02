@@ -1,11 +1,14 @@
 import type {BeforeChangeHook} from 'payload/dist/collections/config/types'
 
-export const updateLatAndLong: BeforeChangeHook = async ({data,operation, originalDoc}) => {
-        if (operation === "create" || data.street !== originalDoc?.street
+export const updateLatAndLong: BeforeChangeHook = async ({data, operation, originalDoc}) => {
+    if (operation === "create" || data.street !== originalDoc?.street
         || data.city !== originalDoc?.city
         || data.state !== originalDoc?.state
         || data.zip !== originalDoc?.zip) {
-        try{
+
+        if (!data.city || !data.street || !data.state || !data.zip) return data;
+
+        try {
             const res = await fetch(`${process.env.PAYLOAD_PUBLIC_SERVER_URL}/api/listings/address-search`, {
                 body: JSON.stringify({"address": data.street + " " + data.city + " " + data.state + " " + data.zip}),
                 headers: {
@@ -17,7 +20,7 @@ export const updateLatAndLong: BeforeChangeHook = async ({data,operation, origin
             const json = await res.json();
 
 
-            if (json.addresses[0].confidence === "exact" && (json.addresses[0].latitude !== data.latitude || json.addresses[0].longitude === data.longitude)){
+            if (json.addresses[0].confidence === "exact" && (json.addresses[0].latitude !== data.latitude || json.addresses[0].longitude === data.longitude)) {
 
                 return {
                     ...data,
@@ -28,7 +31,7 @@ export const updateLatAndLong: BeforeChangeHook = async ({data,operation, origin
 
             return data
 
-        } catch (e){
+        } catch (e) {
             console.log(e);
             return data
         }

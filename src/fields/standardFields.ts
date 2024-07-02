@@ -1,5 +1,4 @@
 import {slugField} from "./slug";
-import standardBlocks from "../blocks";
 import {Field} from "payload/types";
 
 const standardFields: Field[] = [{
@@ -23,13 +22,6 @@ const standardFields: Field[] = [{
         admin: {
             position: 'sidebar',
         }
-    },
-    {
-        name: "content",
-        type: "blocks",
-        minRows: 1,
-        maxRows: 20,
-        blocks: standardBlocks
     }]
 
 export default standardFields;
