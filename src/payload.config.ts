@@ -20,6 +20,7 @@ export default buildConfig({
     bundler: webpackBundler(),
     css: path.resolve(__dirname, 'style.scss')
   },
+  cors: [process.env.PAYLOAD_PUBLIC_NEXT_URL],
   editor: slateEditor({}),
   collections: [Users,Pages,Media,Listings,Locations,Companies],
   globals: [Navigation],
