@@ -4,6 +4,8 @@ import {isAdmin} from "../../access/isAdmin";
 import {revalidateListing} from "./hooks/revalidateListing";
 import standardFields from "../../fields/standardFields";
 import AddressSearch from "../../fields/AddressSearch";
+import {populatePublishedAt} from "../../hooks/populatePublishedAt";
+import {updateLatAndLong} from "./hooks/updateLatAndLong";
 
 export const Listings: CollectionConfig = {
     slug: "listings",
@@ -12,6 +14,7 @@ export const Listings: CollectionConfig = {
         defaultColumns: ["title", "status"]
     },
     hooks: {
+        beforeChange: [populatePublishedAt,updateLatAndLong],
         afterChange: [revalidateListing]
     },
     versions: {
@@ -44,12 +47,12 @@ export const Listings: CollectionConfig = {
 
                     const addressJson = await addressRes.json();
 
-                    console.log(addressJson);
-
                     res.status(200).send(addressJson)
                 } catch (e){
                     console.log(e)
                     res.status(500).send(e.message())
+                } finally {
+                    next();
                 }
 
             }
@@ -95,13 +98,5 @@ export const Listings: CollectionConfig = {
             type: "text",
             hidden: true
         },
-        {
-            name: "address",
-            type: "group",
-            hidden: true,
-            fields: [
-
-            ]
-        }
     ]
 }
