@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 134.34 101.14">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #d2232a;
+      }
+
+      .cls-1, .cls-2 {
+        font-family: Anton-Regular, Anton;
+        font-size: 57.73px;
+      }
+
+      .cls-3 {
+        letter-spacing: .01em;
+      }
+
+      .cls-2, .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-5 {
+        fill: none;
+        stroke-width: 0px;
+      }
+
+      .cls-6 {
+        letter-spacing: 0em;
+      }
+
+      .cls-7 {
+        letter-spacing: 0em;
+      }
+
+      .cls-8 {
+        letter-spacing: -.01em;
+      }
+
+      .cls-9 {
+        clip-path: url(#clippath);
+      }
+
+      .cls-10 {
+        letter-spacing: -.03em;
+      }
+
+      .cls-11 {
+        letter-spacing: -.02em;
+      }
+
+      .cls-4 {
+        font-family: MyriadPro-Regular, 'Myriad Pro';
+        font-size: 14.97px;
+      }
+
+      .cls-12 {
+        letter-spacing: 0em;
+      }
+
+      .cls-13 {
+        letter-spacing: 0em;
+      }
+
+      .cls-14 {
+        letter-spacing: 0em;
+      }
+
+      .cls-15 {
+        letter-spacing: .03em;
+      }
+
+      .cls-16 {
+        letter-spacing: .03em;
+      }
+    </style>
+    <clipPath id="clippath">
+      <rect class="cls-5" width="134.34" height="101.14"/>
+    </clipPath>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <g class="cls-9">
+        <text class="cls-2" transform="translate(22.34 67.91)"><tspan class="cls-16" x="0" y="0">RE</tspan><tspan class="cls-15" x="54.78" y="0">N</tspan><tspan x="85.5" y="0">T</tspan></text>
+        <text class="cls-1" transform="translate(0 67.91)"><tspan x="0" y="0">4</tspan></text>
+      </g>
+      <text class="cls-4" transform="translate(24.99 82.28)"><tspan class="cls-7" x="0" y="0">B</tspan><tspan class="cls-3" x="8.04" y="0">L</tspan><tspan class="cls-10" x="15.28" y="0">A</tspan><tspan class="cls-11" x="23.93" y="0">C</tspan><tspan class="cls-14" x="32.34" y="0">K</tspan><tspan class="cls-12" x="40.48" y="0">H</tspan><tspan class="cls-6" x="50.15" y="0">I</tspan><tspan class="cls-8" x="53.61" y="0">L</tspan><tspan class="cls-13" x="60.48" y="0">L</tspan><tspan x="67.59" y="0">S</tspan></text>
+    </g>
+  </g>
+</svg>
