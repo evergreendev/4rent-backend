@@ -81,7 +81,6 @@ export const Listings: CollectionConfig = {
                     const addressJson = await addressRes.json();
                     if (addressJson?.addresses?.[0]) {
                         const latLong:[number, number] = [addressJson?.addresses[0].latitude, addressJson?.addresses[0].longitude];
-                        console.log(addressJson?.addresses[0]);
                         const searchDistance = 20;//Could be set dynamically later on if need be.
                         const allListings = await payload.find({
                             collection: "listings",
