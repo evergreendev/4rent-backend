@@ -8,15 +8,17 @@ import standardBlocks from "../../blocks";
 import {isAdminOrHasListingAccess} from "../../access/isAdminOrHasListingAccess";
 import {checkForListingLimit} from "./hooks/checkForListingLimit";
 import {isAdminOrHasListingAccessOrIsPublished} from "../../access/isAdminOrHasListingAccessOrIsPublished";
+import payload from "payload";
+import {distanceBetweenTwoPoints} from "../../utilities/distanceBetweenTwoPoints";
 
 export const Listings: CollectionConfig = {
     slug: "listings",
     admin: {
         useAsTitle: "title",
-        defaultColumns: ["title", "status","company"]
+        defaultColumns: ["title", "status", "company"]
     },
     hooks: {
-        beforeChange: [populatePublishedAt,updateLatAndLong,checkForListingLimit],
+        beforeChange: [populatePublishedAt, updateLatAndLong, checkForListingLimit],
         afterChange: [revalidateListing]
     },
     versions: {
@@ -34,12 +36,12 @@ export const Listings: CollectionConfig = {
             handler: async (req, res, next) => {
                 if (!req.body.address) return;
 
-                try{
+                try {
                     const addressRes = await fetch(
                         `https://api.radar.io/v1/search/autocomplete?query=${encodeURIComponent(req.body.address)}}`,
                         {
                             headers: {
-                                "Authorization":process.env.PAYLOAD_PUBLIC_RADAR_PUBLISHABLE,
+                                "Authorization": process.env.PAYLOAD_PUBLIC_RADAR_PUBLISHABLE,
                             }
                         }
                     );
@@ -49,7 +51,60 @@ export const Listings: CollectionConfig = {
                     const addressJson = await addressRes.json();
 
                     res.status(200).send(addressJson)
-                } catch (e){
+                } catch (e) {
+                    console.log(e)
+                    res.status(500).send(e.message())
+                } finally {
+                    next();
+                }
+
+            }
+        },
+        {
+            path: "/by-address",
+            method: "post",
+            handler: async (req, res, next) => {
+                if (!req.body.address) return;
+
+                try {
+                    const addressRes = await fetch(
+                        `https://api.radar.io/v1/search/autocomplete?query=${encodeURIComponent(req.body.address)}}`,
+                        {
+                            headers: {
+                                "Authorization": process.env.PAYLOAD_PUBLIC_RADAR_PUBLISHABLE,
+                            }
+                        }
+                    );
+                    if (addressRes.status !== 200) res.status(500).send();
+
+
+                    const addressJson = await addressRes.json();
+                    if (addressJson?.addresses?.[0]) {
+                        const latLong:[number, number] = [addressJson?.addresses[0].latitude, addressJson?.addresses[0].longitude];
+                        console.log(addressJson?.addresses[0]);
+                        const searchDistance = 20;//Could be set dynamically later on if need be.
+                        const allListings = await payload.find({
+                            collection: "listings",
+                            pagination: false
+                        });
+                        const filteredListings = allListings.docs.map(listing => {
+                            return {
+                                ...listing,
+                                distance: distanceBetweenTwoPoints(
+                                    [parseFloat(listing.latitude), parseFloat(listing.longitude)],
+                                    latLong)
+                            }
+                        }).filter(listing => {
+                            return listing.distance < searchDistance;
+                        }).sort((a, b) => a.distance - b.distance);
+
+                        res.status(200).send({
+                            center: latLong,
+                            listings: filteredListings
+                        })
+
+                    } else res.status(200).send([]);
+                } catch (e) {
                     console.log(e)
                     res.status(500).send(e.message())
                 } finally {
@@ -105,12 +160,10 @@ export const Listings: CollectionConfig = {
         {
             name: "latitude",
             type: "text",
-            hidden: true
         },
         {
             name: "longitude",
             type: "text",
-            hidden: true
         },
     ]
 }
