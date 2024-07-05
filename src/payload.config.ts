@@ -1,6 +1,5 @@
 import path from 'path'
 
-import {payloadCloud} from '@payloadcms/plugin-cloud'
 import {postgresAdapter} from '@payloadcms/db-postgres'
 import {webpackBundler} from '@payloadcms/bundler-webpack'
 import {slateEditor} from '@payloadcms/richtext-slate'
@@ -15,6 +14,7 @@ import {Locations} from "./collections/Locations";
 import {Companies} from "./collections/Companies";
 import {Logo} from "./graphics/Logo";
 import {Icon} from "./graphics/Icon";
+import {SiteOptions} from "./globals/SiteOptions";
 
 export default buildConfig({
     admin: {
@@ -36,14 +36,14 @@ export default buildConfig({
     cors: [process.env.PAYLOAD_PUBLIC_NEXT_URL],
     editor: slateEditor({}),
     collections: [Users, Pages, Media, Listings, Locations, Companies],
-    globals: [Navigation],
+    globals: [Navigation, SiteOptions],
     typescript: {
         outputFile: path.resolve(__dirname, 'payload-types.ts'),
     },
     graphQL: {
         schemaOutputFile: path.resolve(__dirname, 'generated-schema.graphql'),
     },
-    plugins: [payloadCloud()],
+    plugins: [],
     db: postgresAdapter({
         pool: {
             connectionString: process.env.DATABASE_URI,
