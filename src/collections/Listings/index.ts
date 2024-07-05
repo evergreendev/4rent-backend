@@ -68,7 +68,7 @@ export const Listings: CollectionConfig = {
 
                 try {
                     const addressRes = await fetch(
-                        `https://api.radar.io/v1/search/autocomplete?query=${encodeURIComponent(req.body.address)}}`,
+                        `https://api.radar.io/v1/search/autocomplete?query=${encodeURIComponent(req.body.address)}}&limit=1`,
                         {
                             headers: {
                                 "Authorization": process.env.PAYLOAD_PUBLIC_RADAR_PUBLISHABLE,
@@ -96,6 +96,8 @@ export const Listings: CollectionConfig = {
                         }).filter(listing => {
                             return listing.distance < searchDistance;
                         }).sort((a, b) => a.distance - b.distance);
+
+                        filteredListings.length = req.body.limit ? req.body.limit : 1;
 
                         res.status(200).send({
                             center: latLong,
