@@ -97,7 +97,7 @@ export const Listings: CollectionConfig = {
                             return listing.distance < searchDistance;
                         }).sort((a, b) => a.distance - b.distance);
 
-                        filteredListings.length = req.body.limit ? req.body.limit : 1;
+                        filteredListings.length = req.body.limit < filteredListings.length ? req.body.limit : filteredListings.length;
 
                         res.status(200).send({
                             center: latLong,
