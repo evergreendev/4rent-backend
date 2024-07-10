@@ -124,6 +124,12 @@ export const Listings: CollectionConfig = {
             required: true
         },
         {
+            name: "locations",
+            type: "relationship",
+            hasMany: true,
+            relationTo: "locations",
+        },
+        {
             name: "content",
             type: "blocks",
             minRows: 1,
