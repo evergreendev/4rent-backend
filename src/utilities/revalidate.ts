@@ -24,4 +24,22 @@ export const revalidate = async (args: {
             `Error hitting revalidate route for page '${slug}' in collection '${collection}': ${err}`,
         )
     }
+
+    try {
+        const res = await fetch(
+            `${process.env.PAYLOAD_PUBLIC_NEXT_URL}/revalidate?secret=${process.env.REVALIDATION_KEY}&collection=${collection}`,
+        )
+
+        if (res.ok) {
+            payload.logger.info(`Revalidated collection '${collection}'`)
+        } else {
+            payload.logger.error(
+                `Error hitting revalidate generic route collection '${collection}': ${res}`,
+            )
+        }
+    } catch (err: unknown){
+        payload.logger.error(
+            `Error hitting revalidate generic route collection '${collection}': ${err}`,
+        )
+    }
 }
