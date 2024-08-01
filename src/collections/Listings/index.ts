@@ -296,7 +296,6 @@ export const Listings: CollectionConfig = {
                                 "Dog Park",
                                 "Elevator",
                                 "Fitness Center",
-                                "Lawn Care",
                                 "Maintenance (24hr Emergency)",
                                 "Non-Smoking Buildings",
                                 "Handicap Units",
