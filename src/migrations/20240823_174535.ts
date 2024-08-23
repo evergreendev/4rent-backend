@@ -272,7 +272,6 @@ CREATE TABLE IF NOT EXISTS "site_options_rels" (
 	"media_id" integer
 );
 
-ALTER TABLE "listings_rels" DROP CONSTRAINT "listings_rels_pages_fk";
 
 ALTER TABLE "listings_rels" DROP CONSTRAINT "listings_rels_listings_fk";
 
