@@ -272,9 +272,6 @@ CREATE TABLE IF NOT EXISTS "site_options_rels" (
 	"media_id" integer
 );
 
-
-ALTER TABLE "_listings_v_rels" DROP CONSTRAINT "_listings_v_rels_pages_fk";
-
 ALTER TABLE "pages_rels" ADD COLUMN "locations_id" integer;
 ALTER TABLE "_pages_v_rels" ADD COLUMN "locations_id" integer;
 ALTER TABLE "listings" ADD COLUMN "property_description" jsonb;
