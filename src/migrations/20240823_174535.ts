@@ -273,8 +273,6 @@ CREATE TABLE IF NOT EXISTS "site_options_rels" (
 );
 
 
-ALTER TABLE "listings_rels" DROP CONSTRAINT "listings_rels_listings_fk";
-
 ALTER TABLE "_listings_v_rels" DROP CONSTRAINT "_listings_v_rels_pages_fk";
 
 ALTER TABLE "pages_rels" ADD COLUMN "locations_id" integer;
