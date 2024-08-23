@@ -476,5 +476,21 @@ export const Listings: CollectionConfig = {
             name: "longitude",
             type: "text",
         },
+        {
+            name: "contact_phone",
+            label: "Contact Phone",
+            type: "text",
+            admin: {
+                position: "sidebar"
+            }
+        },
+        {
+            name: "contact_email",
+            label: "Contact Email",
+            type: "email",
+            admin: {
+                position: "sidebar"
+            }
+        }
     ]
 }
