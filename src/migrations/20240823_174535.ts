@@ -272,14 +272,6 @@ CREATE TABLE IF NOT EXISTS "site_options_rels" (
 	"media_id" integer
 );
 
-DROP TABLE "listings_blocks_content_block";
-DROP TABLE "listings_blocks_header_block";
-DROP TABLE "listings_blocks_media_block_images";
-DROP TABLE "listings_blocks_media_block";
-DROP TABLE "_listings_v_blocks_content_block";
-DROP TABLE "_listings_v_blocks_header_block";
-DROP TABLE "_listings_v_blocks_media_block_images";
-DROP TABLE "_listings_v_blocks_media_block";
 ALTER TABLE "listings_rels" DROP CONSTRAINT "listings_rels_pages_fk";
 
 ALTER TABLE "listings_rels" DROP CONSTRAINT "listings_rels_listings_fk";
